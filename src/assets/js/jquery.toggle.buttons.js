@@ -1,6 +1,6 @@
 !function ($) {
     "use strict";
-    // version: 2.7
+    // version: 2.8.2
     // by Mattia Larentis - follow me on twitter! @SpiritualGuru
 
     var addToAttribute = function (obj, array, value) {
@@ -15,6 +15,7 @@
     $.fn.toggleButtons = function (method) {
         var $element
             , $div
+            , $cb
             , transitionSpeed = 0.05
             , methods = {
                 init: function (opt) {
@@ -51,12 +52,14 @@
                             $spanRight = $('<span></span>').addClass("labelRight").text(options.label.disabled === undefined ? "OFF " : options.label.disabled);
 
                             // html layout
-                            $div = $element.find('input:checkbox').wrap($('<div></div>')).parent();
+                            $cb = $element.find('input:checkbox')
+
+                            $div = $cb.wrap($('<div></div>')).parent();
                             $div.append($spanLeft);
-                            $div.append($('<label></label>').attr('for', $element.find('input').attr('id')));
+                            $div.append($('<label></label>').attr('for', $cb.attr('id') || ''));
                             $div.append($spanRight);
 
-                            if ($element.find('input').is(':checked'))
+                            if ($cb.is(':checked'))
                                 $element.find('>div').css('left', "0");
                             else $element.find('>div').css('left', "-50%");
 
@@ -88,7 +91,7 @@
                                 .filter('span')
                                 .css('line-height', options.height + "px");
 
-                            if ($element.find('input').is(':disabled'))
+                            if ($cb.is(':disabled'))
                                 $(this).addClass('deactivate');
 
                             $element.find('span').css(options.font);
@@ -101,6 +104,7 @@
                                     if (options.style.custom.enabled.gradient === undefined)
                                         $spanLeft.css('background', options.style.custom.enabled.background);
                                     else $.each(["-webkit-", "-moz-", "-o-", ""], function (i, el) {
+                                        $spanLeft.css('background-color', options.style.custom.enabled.background);
                                         $spanLeft.css('background-image', el + 'linear-gradient(top, ' + options.style.custom.enabled.background + ',' + options.style.custom.enabled.gradient + ')');
                                     });
                                 }
@@ -114,6 +118,7 @@
                                     if (options.style.custom.disabled.gradient === undefined)
                                         $spanRight.css('background', options.style.custom.disabled.background);
                                     else $.each(["-webkit-", "-moz-", "-o-", ""], function (i, el) {
+                                        $spanRight.css('background-color', options.style.custom.disabled.background);
                                         $spanRight.css('background-image', el + 'linear-gradient(top, ' + options.style.custom.disabled.background + ',' + options.style.custom.disabled.gradient + ')');
                                     });
                                 }
@@ -134,13 +139,10 @@
                                 changeStatus($(this));
                             });
 
-                            $('.toggle-button').find('input').on('change', function (e, skipOnChange) {
+                            $element.find('input:checkbox').on('change', function (e, skipOnChange) {
                                 var $element = $(this).parent()
                                     , active = $(this).is(':checked')
                                     , $toggleButton = $(this).closest('.toggle-button');
-
-                                e.preventDefault();
-                                e.stopImmediatePropagation();
 
                                 $element.stop().animate({'left': active ? '0' : '-50%'}, $toggleButton.data('transitionSpeed'));
 
@@ -150,7 +152,7 @@
                                     options.onChange($element, active, e);
                             });
 
-                            $('.toggle-button').find('label').on('mousedown touchstart', function (e) {
+                            $element.find('label').on('mousedown touchstart', function (e) {
                                 moving = false;
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
@@ -177,7 +179,7 @@
 
                                     $(this).on('click touchend', function (e) {
                                         var $target = $(e.target)
-                                            , $myCheckBox = $target.siblings('input');
+                                            , $myCheckBox = $target.siblings('input:checkbox');
 
                                         e.stopImmediatePropagation();
                                         e.preventDefault();
@@ -193,7 +195,7 @@
                                     });
 
                                     $(this).on('mouseleave', function (e) {
-                                        var $myCheckBox = $(this).siblings('input');
+                                        var $myCheckBox = $(this).siblings('input:checkbox');
 
                                         e.preventDefault();
                                         e.stopImmediatePropagation();
@@ -223,11 +225,27 @@
                     $(this).toggleClass('deactivate');
                 },
                 toggleState: function (skipOnChange) {
-                    var $input = $(this).find('input');
+                    var $input = $(this).find('input:checkbox');
                     $input.attr('checked', !$input.is(':checked')).trigger('change', skipOnChange);
                 },
                 setState: function(value, skipOnChange) {
-                    $(this).find('input').attr('checked', value).trigger('change', skipOnChange);
+                    $(this).find('input:checkbox').attr('checked', value).trigger('change', skipOnChange);
+                },
+                status: function () {
+                    return $(this).find('input:checkbox').is(':checked');
+                },
+                destroy: function () {
+                    var $div = $(this).find('div')
+                        , $checkbox;
+
+                    $div.find(':not(input:checkbox)').remove();
+
+                    $checkbox = $div.children();
+                    $checkbox.unwrap().unwrap();
+
+                    $checkbox.unbind('change');
+
+                    return $checkbox;
                 }
             };
 

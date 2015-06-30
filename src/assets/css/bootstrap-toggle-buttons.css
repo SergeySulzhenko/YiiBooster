@@ -18,39 +18,32 @@
     -ms-user-select: none;
     user-select: none;
 }
-
 .toggle-button.deactivate {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
     opacity: 0.5;
     cursor: default !important;
 }
-
 .toggle-button.deactivate label, .toggle-button.deactivate span {
     cursor: default !important;
 }
-
 .toggle-button > div {
     display: inline-block;
     width: 150px;
     position: absolute;
     top: 0;
 }
-
 .toggle-button > div.disabled {
     left: -50%;
 }
-
 .toggle-button input[type=checkbox] {
     display: none;
 }
-
 .toggle-button span, .toggle-button label {
     cursor: pointer;
     position: relative;
     float: left;
     display: inline-block;
 }
-
 .toggle-button label {
     background: #fefefe;
     margin-left: -4px;
@@ -69,14 +62,12 @@
     -o-border-radius: 4px;
     border-radius: 4px;
 }
-
 .toggle-button span {
     color: #fefefe;
     text-align: center;
     font-weight: bold;
     z-index: 1;
 }
-
 .toggle-button span.labelLeft {
     -moz-border-radius-topleft: 4px;
     -webkit-border-top-left-radius: 4px;
@@ -86,11 +77,10 @@
     border-bottom-left-radius: 4px;
     padding-left: 3px;
 }
-
 .toggle-button span.labelRight {
-    -moz-border-radius-bottomright: 4px;
-    -webkit-border-bottom-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
     -moz-border-radius-bottomright: 4px;
     -webkit-border-bottom-right-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -102,7 +92,6 @@
     background-image: linear-gradient(bottom, #fefefe, #e6e6e6);
     padding-right: 3px;
 }
-
 .toggle-button span.primary, .toggle-button span.labelLeft {
     color: #fefefe;
     background: #0088cc;
@@ -112,7 +101,6 @@
     background-image: -o-linear-gradient(bottom, #0088cc, #0055cc);
     background-image: linear-gradient(bottom, #0088cc, #0055cc);
 }
-
 .toggle-button span.info {
     color: #fefefe;
     background: #5bc0de;
@@ -122,7 +110,6 @@
     background-image: -o-linear-gradient(bottom, #5bc0de, #2f96b4);
     background-image: linear-gradient(bottom, #5bc0de, #2f96b4);
 }
-
 .toggle-button span.success {
     color: #fefefe;
     background: #62c462;
@@ -132,7 +119,6 @@
     background-image: -o-linear-gradient(bottom, #62c462, #51a351);
     background-image: linear-gradient(bottom, #62c462, #51a351);
 }
-
 .toggle-button span.warning {
     color: #fefefe;
     background: #dbb450;
@@ -142,7 +128,6 @@
     background-image: -o-linear-gradient(bottom, #dbb450, #f89406);
     background-image: linear-gradient(bottom, #dbb450, #f89406);
 }
-
 .toggle-button span.danger {
     color: #fefefe;
     background: #ee5f5b;
