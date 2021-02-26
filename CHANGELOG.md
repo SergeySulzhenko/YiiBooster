@@ -10,6 +10,9 @@ Antonio Ramirez.
 
 ## YiiBooster latest development alpha
 -
+## YiiBooster version 3.1.4
+- **(fix)** Fixes of warnings by PHPCompatibility checks fot php8.0
+
 ## YiiBooster version 3.1.3
 - **(enh)** Update bootstrap-toggle-buttons to last version (2.7 -> 2.8.2 from nostalgiaz/bootstrap-toggle-buttons) for support jquery-1.11 (yii-1.1.16)
 
