@@ -60,7 +60,7 @@ class TbEditableField extends TbEditable
             $this->pk = is_array($this->model->primaryKey) ? CJSON::encode($this->model->primaryKey) : $this->model->primaryKey;
         }
 
-		$originalText = strlen($this->text) ? $this->text : CHtml::value($this->model, $this->attribute);
+		$originalText = strlen((string)$this->text) ? $this->text : CHtml::value($this->model, $this->attribute);
 
         /**
          * if apply set manually to false --> just render text, no js plugin applied
@@ -115,7 +115,7 @@ class TbEditableField extends TbEditable
          * If text not defined, generate it from model attribute for types except lists ('select', 'checklist' etc)
          * For lists keep it empty to apply autotext
 		 */
-		if (!strlen($this->text) && !$this->_prepareToAutoText) {
+		if (!strlen((string)$this->text) && !$this->_prepareToAutoText) {
 			$this->text = $originalText;
 		}
 	}

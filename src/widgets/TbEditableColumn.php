@@ -118,7 +118,7 @@ class TbEditableColumn extends TbDataColumn
 		);
 
 		//if value defined for column --> use it as element text
-		if (strlen($this->value)) {
+		if (strlen((string)$this->value)) {
 			ob_start();
 			parent::renderDataCellContent($row, $data);
 			$text = ob_get_clean();
@@ -177,7 +177,7 @@ class TbEditableColumn extends TbDataColumn
 		}
 
 		//inserting trigger
-		if (strlen($this->grid->afterAjaxUpdate)) {
+		if (strlen((string)$this->grid->afterAjaxUpdate)) {
 			$orig = $this->grid->afterAjaxUpdate;
 			if (strpos($orig, 'js:') === 0) {
 				$orig = substr($orig, 3);
