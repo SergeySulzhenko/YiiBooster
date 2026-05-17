@@ -172,7 +172,7 @@ class TbEditableColumn extends TbDataColumn
 		$trigger = '$("#"+id).trigger("ajaxUpdate.yiiGridView");';
 
 		//check if trigger already inserted by another column
-		if (strpos($this->grid->afterAjaxUpdate, $trigger) !== false) {
+		if (strpos((string)$this->grid->afterAjaxUpdate, $trigger) !== false) {
 			return;
 		}
 
